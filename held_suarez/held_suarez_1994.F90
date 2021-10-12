@@ -79,7 +79,7 @@ contains
 !> \section arg_table_held_suarez_1994_run Argument Table
 !! \htmlinclude held_suarez_1994_run.html
   subroutine held_suarez_1994_run(pver, ncol, clat, pmid, &
-       u, v, t, du, dv, s, scheme_name, errmsg, errflg)
+       u, v, t, du, dv, s, dt_total, du_total, dv_total, scheme_name, errmsg, errflg)
 
     !
     ! Input arguments
@@ -97,6 +97,9 @@ contains
     real(kind_phys),   intent(out) :: du(:,:)   ! Zonal wind tend
     real(kind_phys),   intent(out) :: dv(:,:)   ! Meridional wind tend
     real(kind_phys),   intent(out) :: s(:,:)    ! Heating rate
+    real(kind_phys),   intent(out) :: dt_total(:,:) ! Air Temperature tend total
+    real(kind_phys),   intent(out) :: du_total(:,:) ! Zonal wind tend total
+    real(kind_phys),   intent(out) :: dv_total(:,:) ! Meridional wind tend total
     character(len=64), intent(out) :: scheme_name
     character(len=512),intent(out):: errmsg
     integer,           intent(out):: errflg
@@ -166,6 +169,9 @@ contains
     !
     du(:,:) = 0._kind_phys
     dv(:,:) = 0._kind_phys
+    du_total(:,:) = 0._kind_phys
+    dv_total(:,:) = 0._kind_phys
+    dt_total(:,:) = 0._kind_phys
 
     !
     do k = 1, pver
