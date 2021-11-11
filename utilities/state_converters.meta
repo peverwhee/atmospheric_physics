@@ -295,6 +295,36 @@
    type = integer
    intent = out
    optional = F
+[ccpp-table-properties]
+   name = undo_exner
+   type = scheme
+[ccpp-arg-table]
+   name = undo_exner_run
+   type = scheme
+[ exner ]
+   standard_name = inverse_exner_function_wrt_surface_pressure
+   state_variable = true
+   type = real
+   kind = kind_phys
+   units = count
+   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
+   intent = out
+[ errmsg ]
+   standard_name = ccpp_error_message
+   long_name = Error message for error handling in CCPP
+   units = 1
+   dimensions = ()
+   type = character | kind = len=*
+   intent = out
+   optional = F
+[ errflg ]
+   standard_name = ccpp_error_code
+   long_name = Error flag for error handling in CCPP
+   units = 1
+   dimensions = ()
+   type = integer
+   intent = out
+   optional = F
 #########################################################
 [ccpp-table-properties]
   name = wet_to_dry

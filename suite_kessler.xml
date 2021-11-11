@@ -12,5 +12,6 @@
     <scheme>kessler_update</scheme>
     <scheme>geopotential_t</scheme>
     <scheme>qneg</scheme>
+    <scheme>undo_exner</scheme>
   </group>
 </suite>

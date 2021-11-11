@@ -18,6 +18,7 @@ module state_converters
   public :: calc_exner_init
   public :: calc_exner_run
 
+  public :: undo_exner_run
   ! Convert between wet and dry
   public :: wet_to_dry_run
   public :: dry_to_wet_run
@@ -26,6 +27,7 @@ module state_converters
   real(kind_phys), parameter :: unset = 98989.8e99_kind_phys
   real(kind_phys) :: rd = unset    ! gas constant for dry air, J/(kgK)
   real(kind_phys) :: cp = unset    ! heat capacity at constant pressure, J/(kgK)
+  real(kind_phys), allocatable :: prev_exner(:,:)
 
   ! Private interfaces
   private :: safe_set ! Set constants checking for consistency
@@ -166,7 +168,8 @@ CONTAINS
     integer,          intent(out) :: errflg
 
     integer :: i
-
+    allocate(prev_exner(ncol,nz))
+    prev_exner = exner
     do i=1,nz
       exner(:ncol,i) = (pmid(:ncol,i)/1.e5_kind_phys)**(rair/cpair)
     end do
@@ -175,6 +178,19 @@ CONTAINS
     errmsg = ''
 
   end subroutine calc_exner_run
+
+!> \section arg_table_undo_exner_run Argument Table
+!! \htmlinclude undo_exner_run.html
+   subroutine undo_exner_run(exner, errmsg, errflg)
+      real(kind_phys), intent(out) :: exner(:,:)
+      character(len=*), intent(out) :: errmsg
+      integer,          intent(out) :: errflg
+      exner = prev_exner
+      errflg = 0
+      errmsg = ''
+      deallocate(prev_exner)
+   end subroutine undo_exner_run
+   
 
 !> \section arg_table_wet_to_dry_run  Argument Table
 !! \htmlinclude wet_to_dry_run.html
