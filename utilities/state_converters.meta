@@ -44,11 +44,10 @@
 [ errmsg ]
   standard_name = ccpp_error_message
   long_name = Error message for error handling in CCPP
-  units = 1
+  units = none
   type = character | kind = len=*
   dimensions = ()
   intent = out
-  optional = F
 [ errflg ]
   standard_name = ccpp_error_code
   long_name = Error flag for error handling in CCPP
@@ -56,7 +55,6 @@
   type = integer
   dimensions = ()
   intent = out
-  optional = F
 #####################################################################
 [ccpp-table-properties]
   name = potential_temp_to_temp
@@ -103,7 +101,7 @@
 [ errmsg ]
   standard_name = ccpp_error_message
   long_name = Error message for error handling in CCPP
-  units = 1
+  units = none
   dimensions = ()
   type = character | kind = len=*
   intent = out
@@ -137,11 +135,10 @@
 [ errmsg ]
    standard_name = ccpp_error_message
    long_name = Error message for error handling in CCPP
-   units = 1
+   units = none
    dimensions = ()
    type = character | kind = len=*
    intent = out
-   optional = F
 [ errflg ]
    standard_name = ccpp_error_code
    long_name = Error flag for error handling in CCPP
@@ -149,7 +146,6 @@
    dimensions = ()
    type = integer
    intent = out
-   optional = F
 
 #########################################################
 [ccpp-arg-table]
@@ -162,7 +158,6 @@
   dimensions = ()
   type = integer
   intent = in
-  optional = F
 [ nz ]
   standard_name = vertical_layer_dimension
   long_name = number of vertical layers
@@ -170,7 +165,6 @@
   dimensions = ()
   type = integer
   intent = in
-  optional = F
 [ pmiddry ]
   standard_name = air_pressure_of_dry_air
   long_name = Dry midpoint pressure
@@ -196,11 +190,10 @@
 [ errmsg ]
    standard_name = ccpp_error_message
    long_name = Error message for error handling in CCPP
-   units = 1
+   units = none
    dimensions = ()
    type = character | kind = len=*
    intent = out
-   optional = F
 [ errflg ]
    standard_name = ccpp_error_code
    long_name = Error flag for error handling in CCPP
@@ -208,7 +201,6 @@
    dimensions = ()
    type = integer
    intent = out
-   optional = F
 #########################################################
 [ccpp-table-properties]
   name = calc_exner
@@ -219,11 +211,10 @@
 [ errmsg ]
    standard_name = ccpp_error_message
    long_name = Error message for error handling in CCPP
-   units = 1
+   units = none
    dimensions = ()
    type = character | kind = len=*
    intent = out
-   optional = F
 [ errflg ]
    standard_name = ccpp_error_code
    long_name = Error flag for error handling in CCPP
@@ -231,7 +222,6 @@
    dimensions = ()
    type = integer
    intent = out
-   optional = F
 #########################################################
 [ccpp-arg-table]
   name = calc_exner_run
@@ -282,11 +272,10 @@
 [ errmsg ]
    standard_name = ccpp_error_message
    long_name = Error message for error handling in CCPP
-   units = 1
+   units = none
    dimensions = ()
    type = character | kind = len=*
    intent = out
-   optional = F
 [ errflg ]
    standard_name = ccpp_error_code
    long_name = Error flag for error handling in CCPP
@@ -294,7 +283,6 @@
    dimensions = ()
    type = integer
    intent = out
-   optional = F
 #########################################################
 [ccpp-table-properties]
   name = wet_to_dry
@@ -346,7 +334,6 @@
   type = real
   kind = kind_phys
   intent = inout
-  optional = T
 [ qr ]
   standard_name = rain_water_mixing_ratio
   units = kg kg-1
@@ -354,11 +341,10 @@
   type = real
   kind = kind_phys
   intent = inout
-  optional = T
 [ errmsg ]
    standard_name = ccpp_error_message
    long_name = Error message for error handling in CCPP
-   units = 1
+   units = none
    dimensions = ()
    type = character | kind = len=*
    intent = out
@@ -369,7 +355,6 @@
    dimensions = ()
    type = integer
    intent = out
-   optional = F
 
 #########################################################
 [ccpp-table-properties]
@@ -422,7 +407,6 @@
   type = real
   kind = kind_phys
   intent = inout
-  optional = T
 [ qr ]
   standard_name = rain_water_mixing_ratio
   units = kg kg-1
@@ -430,11 +414,10 @@
   type = real
   kind = kind_phys
   intent = inout
-  optional = T
 [ errmsg ]
    standard_name = ccpp_error_message
    long_name = Error message for error handling in CCPP
-   units = 1
+   units = none
    dimensions = ()
    type = character | kind = len=*
    intent = out
