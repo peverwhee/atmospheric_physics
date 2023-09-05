@@ -1,0 +1,224 @@
+[ccpp-arg-table]
+  name = cu_ntiedtke_init
+  type = scheme
+[con_cp]
+  standard_name = specific_heat_of_dry_air_at_constant_pressure
+  long_name = specific heat of dry air at constant pressure
+  units = J kg-1 K-1
+  dimensions = ()
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[con_rd]
+  standard_name = gas_constant_for_dry_air
+  long_name = ideal gas constant for dry air
+  units = J kg-1 K-1
+  dimensions = ()
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[con_rv]
+  standard_name = gas_constant_water_vapor
+  long_name = gas constant water vapor
+  units = J kg-1 K-1
+  dimensions = ()
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[con_xlv]
+  standard_name = latent_heat_of_vaporization_of_water_at_0C
+  long_name = latent heat of vaporization of water at 0C
+  units = J kg-1
+  dimensions = ()
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[con_xls]
+  standard_name = latent_heat_of_sublimation_of_water_at_0C
+  long_name = latent heat of sublimation of water at 0C
+  units = J kg-1
+  dimensions = ()
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[con_xlf]
+  standard_name = latent_heat_of_fusion_of_water_at_0C
+  long_name = latent heat of fusion of water at 0C
+  units = J kg-1
+  dimensions = ()
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[con_grav]
+  standard_name = gravitational_acceleration
+  long_name = gravitational acceleration
+  units = m s-2
+  dimensions = ()
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[errmsg]
+  standard_name = ccpp_error_message
+  long_name = error message for error handling in CCPP
+  units = 1
+  dimensions = ()
+  type = character
+  kind = len=*
+  intent = out
+  optional = F
+[errflg]
+  standard_name = option_ccpp_error
+  long_name = option error handling in CCPP
+  units = flag
+  dimensions = ()
+  type = integer
+  intent = out
+  optional = F
+
+
+
+
+[ccpp-arg-table]
+  name = cu_ntiedtke_final
+  type = scheme
+[errmsg]
+  standard_name = ccpp_error_message
+  long_name = error message for error handling in CCPP
+  units = 1
+  dimensions = ()
+  type = character
+  kind = len=*
+  intent = out
+  optional = F
+[errflg]
+  standard_name = option_ccpp_error
+  long_name = option error handling in CCPP
+  units = flag
+  dimensions = ()
+  type = integer
+  intent = out
+  optional = F
+
+
+
+
+[ccpp-arg-table]
+  name = cu_ntiedtke_timestep_init
+  type = scheme
+[its]
+  standard_name = horizontal_begin
+  long_name = horizontal begin
+  units = none
+  dimensions = ()
+  type = integer
+  intent = in
+  optional = F
+[ite]
+  standard_name = horizontal_end
+  long_name = horizontal end
+  units = none
+  dimensions = ()
+  type = integer
+  intent = in
+  optional = F
+[kts]
+  standard_name = vertical_begin
+  long_name = vertical begin
+  units = none
+  dimensions = ()
+  type = integer
+  intent = in
+  optional = F
+[kte]
+  standard_name = vertical_end
+  long_name = vertical end
+  units = none
+  dimensions = ()
+  type = integer
+  intent = in
+  optional = F
+[im]
+  standard_name = horizontal_dimension
+  long_name = horizontal dimension
+  units = none
+  dimensions = ()
+  type = integer
+  intent = in
+  optional = F
+[kx]
+  standard_name = vertical_layer_dimension
+  long_name = vertical layer dimension
+  units = none
+  dimensions = ()
+  type = integer
+  intent = in
+  optional = F
+[kx1]
+  standard_name = vertical_interface_dimension
+  long_name = vertical interface dimension
+  units = none
+  dimensions = ()
+  type = integer
+  intent = in
+  optional = F
+
+[itimestep]
+
+[stepcu]
+
+[dt]
+
+[grav]
+  standard_name = gravitational_acceleration
+  long_name = gravitational acceleration
+  units = m s-2
+  dimensions = ()
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[xland]
+  standard_name = sea_land_ice_mask 
+  long_name = sea land ice mask
+  units = none 
+  dimensions = (horizontal_begin:horizontal_end)
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[dz]
+  standard_name = layer_thickness
+  long_name = layer thickness
+  units = m
+  dimensions = (horizontal_begin:horizontal_end,vertical_layer_dimension)
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[pres]
+  standard_name = air_pressure
+  long_name = air pressure
+  units = Pa
+  dimensions = (horizontal_begin:horizontal_end,vertical_layer_dimension)
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+[presi]
+  standard_name = air_pressure_at_interface
+  long_name = air pressure at interface
+  units = Pa
+  dimensions = (horizontal_begin:horizontal_end,vertical_interface_dimension)
+  type = real | kind = kind_phys
+  intent = in
+  optional = F
+
+
+
+
+
+[ccpp-arg-table]
+  name = cu_ntiedtke_timestep_final
+  type = scheme
+
+
+
+
+
+
