@@ -1,0 +1,89 @@
+[ccpp-table-properties]
+  name = cu_ntiedtke_pre_sima
+  type = scheme
+
+[ccpp-arg-table]
+  name  = cu_ntiedtke_pre_sima_init
+  type  = scheme
+[ qvften ]
+  standard_name = tendency_of_water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water_advection_plus_pbl_plus_radiation
+  units = kg kg-1 s-1
+  type = real | kind = kind_phys
+  dimensions = (horizontal_dimension, vertical_layer_dimension)
+  intent =out
+[ thften ]
+  standard_name = tendency_of_air_temperature_advection_plus_pbl_plus_radiation
+  units = K s-1
+  type = real | kind = kind_phys
+  dimensions = (horizontal_dimension, vertical_layer_dimension)
+  intent = out
+[ height ]
+  standard_name = geopotential_height_wrt_surface_at_interface
+  units = m
+  type = real | kind = kind_phys
+  dimensions = (horizontal_dimension, vertical_interface_dimension)
+  intent = in
+[ thickness ]
+  standard_name = layer_thickness
+  units = m
+  type = real | kind = kind_phys
+  dimensions = (horizontal_dimension, vertical_layer_dimension)
+  intent = out
+[ slimsk ]
+  standard_name = sea_land_ice_mask
+  units = none
+  type = integer
+  dimensions = (horizontal_dimension)
+  intent = out
+[ evap ]
+  standard_name = kinematic_surface_upward_moisture_flux
+  units = kg m-2 s-1
+  type = real | kind = kind_phys
+  dimensions = (horizontal_dimension)
+  intent = out
+[ hfx ]
+  standard_name = kinematic_surface_upward_sensible_heat_flux
+  units = W m-2
+  type = real | kind = kind_phys
+  dimensions = (horizontal_dimension)
+  intent = out
+[ cell_size ]
+  standard_name = cell_size
+  units = m
+  dimensions = (horizontal_dimension)
+  type = real | kind = kind_phys
+  intent = out
+[ stepcu ]
+  standard_name = number_of_timesteps_between_convection_calls
+  units = count
+  dimensions = ()
+  type = integer
+  intent = out
+[ errmsg ]
+  standard_name = ccpp_error_message
+  units = none
+  type = character | kind = len=*
+  dimensions = ()
+  intent = out
+[ errflg ]
+  standard_name = ccpp_error_code
+  units = 1
+  type = integer
+  dimensions = ()
+  intent = out
+
+[ccpp-arg-table]
+  name  = cu_ntiedtke_pre_sima_run
+  type  = scheme
+[ errmsg ]
+  standard_name = ccpp_error_message
+  units = none
+  type = character | kind = len=*
+  dimensions = ()
+  intent = out
+[ errflg ]
+  standard_name = ccpp_error_code
+  units = 1
+  type = integer
+  dimensions = ()
+  intent = out

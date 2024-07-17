@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="ntiedtke" version="1.0">
+  <group name="physics_before_coupler">
+    <scheme>calc_dry_air_ideal_gas_density</scheme>
+    <scheme>calc_exner</scheme>
+    <scheme>cu_ntiedtke_pre_sima</scheme>
+    <scheme>cu_ntiedtke_pre</scheme>
+    <scheme>cu_ntiedtke</scheme>
+    <scheme>cu_ntiedtke_post</scheme>
+  </group>
+</suite>
