@@ -125,6 +125,7 @@
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
   type = real | kind = kind_phys
   intent = inout
+  diagnostic_name = Q
 [ qc ]
   standard_name = cloud_liquid_water_mixing_ratio_wrt_dry_air
   long_name = Mass mixing ratio of cloud liquid water / dry air
@@ -132,6 +133,7 @@
   units = kg kg-1
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
   type = real | kind = kind_phys
+  diagnostic_name = CLDLIQ
   intent = inout
 [ qr ]
   standard_name = rain_mixing_ratio_wrt_dry_air
@@ -140,6 +142,7 @@
   units = kg kg-1
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
   type = real | kind = kind_phys
+  diagnostic_name = RAINQ
   intent = inout
 [ precl ]
   standard_name = total_precipitation_rate_at_surface

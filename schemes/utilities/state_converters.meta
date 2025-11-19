@@ -276,6 +276,7 @@
 [ qv ]
   standard_name = water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water
   advected = True
+  diagnostic_name = Q
   type = real | kind = kind_phys
   units = kg kg-1
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
@@ -338,6 +339,7 @@
   standard_name = cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water
   long_name = Mass mixing ratio of cloud liquid water / moist_air + condensed water
   advected = True
+  diagnostic_name = CLDLIQ
   type = real | kind = kind_phys
   units = kg kg-1
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
@@ -400,6 +402,7 @@
   standard_name = cloud_ice_mixing_ratio_wrt_moist_air_and_condensed_water
   long_name = Mass mixing ratio of cloud ice / moist_air + condensed water
   advected = True
+  diagnostic_name = CLDICE
   type = real | kind = kind_phys
   units = kg kg-1
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
@@ -462,6 +465,7 @@
   standard_name = rain_mixing_ratio_wrt_moist_air_and_condensed_water
   long_name = Mass mixing ratio of rain / moist air + condensed water
   advected = True
+  diagnostic_name = RAINQ
   type = real | kind = kind_phys
   units = kg kg-1
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
@@ -530,6 +534,7 @@
 [ qv ]
   standard_name = water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water
   advected = True
+  diagnostic_name = Q
   type = real | kind = kind_phys
   units = kg kg-1
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
@@ -592,6 +597,7 @@
   standard_name = cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water
   long_name = Mass mixing ratio of cloud liquid water / moist air
   advected = True
+  diagnostic_name = CLDLIQ
   type = real | kind = kind_phys
   units = kg kg-1
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
@@ -654,6 +660,7 @@
   standard_name = cloud_ice_mixing_ratio_wrt_moist_air_and_condensed_water
   long_name = Mass mixing ratio of cloud ice / moist air + condensed water
   advected = True
+  diagnostic_name = CLDICE
   type = real | kind = kind_phys
   units = kg kg-1
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
@@ -716,6 +723,7 @@
   standard_name = rain_mixing_ratio_wrt_moist_air_and_condensed_water
   long_name = Mass mixing ratio of rain / moist_air
   advected = True
+  diagnostic_name = RAINQ
   type = real | kind = kind_phys
   units = kg kg-1
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)

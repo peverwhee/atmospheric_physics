@@ -89,6 +89,7 @@
   type = real | kind = kind_phys
   dimensions = (horizontal_loop_extent,vertical_layer_dimension)
   intent = in
+  diagnostic_name = Q
   advected = true
 [ landfrac ]
   standard_name = land_area_fraction_from_coupler

@@ -20,6 +20,7 @@ module musica_ccpp_tuvx_load_species
     'cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water'
   character(len=*), parameter, public :: CLOUD_LIQUID_WATER_CONTENT_LONG_NAME = &
     'cloud water mass mixing ratio with respect to moist air plus all airborne condensates'
+  character(len=*), parameter, public :: CLOUD_LIQUID_WATER_CONTENT_DIAG_NAME = 'CLDLIQ'
   character(len=*), parameter, public :: CLOUD_LIQUID_WATER_CONTENT_UNITS = 'kg kg-1'
   real(kind_phys),  parameter, public :: CLOUD_LIQUID_WATER_CONTENT_MOLAR_MASS = 0.018_kind_phys ! kg mol-1
   ! Gas species - dry air, O2, O3
@@ -74,6 +75,7 @@ contains
     call temp_constituent_props(i_new)%instantiate( &
       std_name = CLOUD_LIQUID_WATER_CONTENT_LABEL, &
       long_name = CLOUD_LIQUID_WATER_CONTENT_LONG_NAME, &
+      diag_name = CLOUD_LIQUID_WATER_CONTENT_DIAG_NAME, &
       units = CLOUD_LIQUID_WATER_CONTENT_UNITS, &
       vertical_dim = "vertical_layer_dimension", &
       default_value = 0.0_kind_phys, &
@@ -109,6 +111,7 @@ contains
       call temp_constituent_props(i_new)%instantiate( &
         std_name = DRY_AIR_LABEL, &
         long_name = DRY_AIR_LABEL, &
+        diag_name = DRY_AIR_LABEL, &
         units = 'kg kg-1', &
         vertical_dim = "vertical_layer_dimension", &
         default_value = 0.0_kind_phys, &
@@ -125,6 +128,7 @@ contains
       call temp_constituent_props(i_new)%instantiate( &
         std_name = O2_LABEL, &
         long_name = O2_LABEL, &
+        diag_name = O2_LABEL, &
         units = 'kg kg-1', &
         vertical_dim = "vertical_layer_dimension", &
         default_value = 0.0_kind_phys, &
@@ -141,6 +145,7 @@ contains
       call temp_constituent_props(i_new)%instantiate( &
         std_name = O3_LABEL, &
         long_name = O3_LABEL, &
+        diag_name = O3_LABEL, &
         units = 'kg kg-1', &
         vertical_dim = "vertical_layer_dimension", &
         default_value = 0.0_kind_phys, &

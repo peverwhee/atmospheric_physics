@@ -192,6 +192,7 @@
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
   intent = inout
   advected = True
+  diagnostic_name = Q
 [ shflx ]
   standard_name = surface_upward_sensible_heat_flux
   units = W m-2

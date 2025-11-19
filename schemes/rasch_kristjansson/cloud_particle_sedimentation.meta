@@ -170,6 +170,7 @@
   standard_name = cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water
   units = kg kg-1
   advected = True
+  diagnostic_name = CLDLIQ
   type = real | kind = kind_phys
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
   intent = in
@@ -177,6 +178,7 @@
   standard_name = cloud_ice_mixing_ratio_wrt_moist_air_and_condensed_water
   units = kg kg-1
   advected = True
+  diagnostic_name = CLDICE
   type = real | kind = kind_phys
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
   intent = in

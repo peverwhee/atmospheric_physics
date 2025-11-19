@@ -31,6 +31,7 @@ subroutine initialize_constituents_register(constituents, errmsg, errcode)
     character(len=256) :: variable_name
     character(len=512) :: alloc_err_msg
     character(len=256), allocatable :: constituent_names(:)
+    character(len=256), allocatable :: constituent_diag_names(:)
     character(len=65), parameter :: water_species_std_names(6) = &
       (/'water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water       ', &
         'cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water', &
@@ -66,6 +67,12 @@ subroutine initialize_constituents_register(constituents, errmsg, errcode)
        write(errmsg,*) 'Failed to allocate "constituent_names" in initialize_constituents_register: ', trim(alloc_err_msg)
        return
     end if
+    allocate(constituent_diag_names(num_variables), stat=ierr, errmsg=alloc_err_msg)
+    if (ierr /= 0) then
+       errcode = 1
+       write(errmsg,*) 'Failed to allocate "constituent_diag_names" in initialize_constituents_register: ', trim(alloc_err_msg)
+       return
+    end if
 
     ! Loop over all variables in the file and add each constituent to the
     !  dynamic constituent array
@@ -79,6 +86,7 @@ subroutine initialize_constituents_register(constituents, errmsg, errcode)
              do known_const_index = 1, size(const_file_names)
                 if (trim(const_file_names(known_const_index)) == trim(variable_name)) then
                    constituent_names(constituent_index) = water_species_std_names(known_const_index)
+                   constituent_diag_names(constituent_index) = variable_name(index(variable_name, "_") + 1:)
                    found_const_count = found_const_count + 1
                    known_constituent = .true.
                    exit
@@ -103,6 +111,8 @@ subroutine initialize_constituents_register(constituents, errmsg, errcode)
           call constituents(var_index)%instantiate(     &
              std_name = constituent_names(var_index),   &
              long_name = constituent_names(var_index),  &
+             diag_name = constituent_diag_
+     names(var_index),  &
              units = 'kg-1',                            &
              vertical_dim = 'vertical_layer_dimension', &
              min_value = 0.0_kind_phys,                 &
@@ -118,6 +128,7 @@ subroutine initialize_constituents_register(constituents, errmsg, errcode)
           call constituents(var_index)%instantiate(     &
              std_name = constituent_names(var_index),   &
              long_name = constituent_names(var_index),  &
+             diag_name = constituent_diag_names(var_index),  &
              units = 'kg kg-1',                         &
              vertical_dim = 'vertical_layer_dimension', &
              min_value = 0.0_kind_phys,                 &
@@ -129,6 +140,7 @@ subroutine initialize_constituents_register(constituents, errmsg, errcode)
           call constituents(var_index)%instantiate(     &
              std_name = constituent_names(var_index),   &
              long_name = constituent_names(var_index),  &
+             diag_name = constituent_diag_names(var_index),  &
              units = 'kg kg-1',                         &
              vertical_dim = 'vertical_layer_dimension', &
              min_value = 0.0_kind_phys,                 &

@@ -34,6 +34,7 @@
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
   intent = in
   advected = true
+  diagnostic_name = Q
 [ cldice ]
   standard_name = cloud_ice_mixing_ratio_wrt_moist_air_and_condensed_water
   units = kg kg-1
@@ -41,6 +42,7 @@
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
   intent = in
   advected = true
+  diagnostic_name = CLDICE
 [ cldliq ]
   standard_name = cloud_liquid_water_mixing_ratio_wrt_moist_air_and_condensed_water
   units = kg kg-1
@@ -48,6 +50,7 @@
   dimensions = (horizontal_loop_extent, vertical_layer_dimension)
   intent = in
   advected = true
+  diagnostic_name = CLDLIQ
 [ qcwat ]
   standard_name = water_vapor_mixing_ratio_wrt_moist_air_and_condensed_water_on_previous_timestep
   units = kg kg-1
