@@ -111,8 +111,7 @@ subroutine initialize_constituents_register(constituents, errmsg, errcode)
           call constituents(var_index)%instantiate(     &
              std_name = constituent_names(var_index),   &
              long_name = constituent_names(var_index),  &
-             diag_name = constituent_diag_
-     names(var_index),  &
+             diag_name = constituent_diag_names(var_index),  &
              units = 'kg-1',                            &
              vertical_dim = 'vertical_layer_dimension', &
              min_value = 0.0_kind_phys,                 &
