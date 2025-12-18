@@ -4,7 +4,7 @@
   dependencies = ./objects/ccpp_fluxes_byband.F90
 
 [ccpp-arg-table]
-  name  = rrtmgp_pre_init
+  name  = rrtmgp_pre_register
   type  = scheme
 [ nradgas ]
   standard_name = number_of_active_gases_for_RRTMGP

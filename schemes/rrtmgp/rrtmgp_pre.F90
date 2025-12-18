@@ -2,17 +2,17 @@ module rrtmgp_pre
  implicit none
  private
 
- public :: rrtmgp_pre_init
+ public :: rrtmgp_pre_register
  public :: rrtmgp_pre_timestep_init
  public :: rrtmgp_pre_run
  public :: radiation_do_ccpp ! Public because it needs to be accessed elsewhere in CAM
 
 CONTAINS
 
-!> \section arg_table_rrtmgp_pre_init Argument Table
-!! \htmlinclude rrtmgp_pre_init.html
+!> \section arg_table_rrtmgp_pre_register Argument Table
+!! \htmlinclude rrtmgp_pre_register.html
 !!
-  subroutine rrtmgp_pre_init(nradgas, available_gases, gaslist, gaslist_lc, errmsg, errflg)
+  subroutine rrtmgp_pre_register(nradgas, available_gases, gaslist, gaslist_lc, errmsg, errflg)
      use ccpp_gas_concentrations, only: ty_gas_concs_ccpp
      use atmos_phys_string_utils, only: to_lower
      integer,                    intent(in) :: nradgas          ! Number of radiatively active gases
@@ -41,7 +41,7 @@ CONTAINS
         errflg = 1
      end if
 
-  end subroutine rrtmgp_pre_init
+  end subroutine rrtmgp_pre_register
 
 !> \section arg_table_rrtmgp_pre_timestep_init Argument Table
 !! \htmlinclude rrtmgp_pre_timestep_init.html

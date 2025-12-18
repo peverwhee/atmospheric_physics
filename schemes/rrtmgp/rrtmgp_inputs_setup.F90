@@ -3,25 +3,81 @@ module rrtmgp_inputs_setup
  implicit none
  private
 
+ public :: rrtmgp_inputs_setup_register
  public :: rrtmgp_inputs_setup_init
 
  contains
+!> \section arg_table_rrtmgp_inputs_setup_register Argument Table
+!! \htmlinclude rrtmgp_inputs_setup_register.html
+!!
+  subroutine rrtmgp_inputs_setup_register(kdist_sw, kdist_lw, nswbands, nlwbands, nswgpts, nlwgpts, &
+                   sw_low_bounds, sw_high_bounds, idx_sw_diag, idx_nir_diag, idx_uv_diag, idx_sw_cloudsim, &
+                   idx_lw_diag, idx_lw_cloudsim, band2gpt_sw, changeseed, errmsg, errflg)
+     use ccpp_kinds,             only: kind_phys
+     use ccpp_gas_optics_rrtmgp, only: ty_gas_optics_rrtmgp_ccpp
+     use radiation_utils,        only: radiation_utils_register, get_sw_spectral_boundaries_ccpp
+
+     integer,                         intent(in) :: nswbands
+     integer,                         intent(in) :: nlwbands               ! Number of longwave bands
+     type(ty_gas_optics_rrtmgp_ccpp), intent(in) :: kdist_sw               ! Shortwave gas optics object
+     type(ty_gas_optics_rrtmgp_ccpp), intent(in) :: kdist_lw               ! Longwave gas optics object
+     integer,                         intent(out) :: nlwgpts               ! Number of longwave g-points
+     integer,                         intent(out) :: nswgpts               ! Number of shortwave g-points
+     ! Indices to specific bands for diagnostic output and COSP input
+     integer,                         intent(out) :: idx_sw_diag           ! Index of band containing 500-nm wave
+     integer,                         intent(out) :: idx_nir_diag          ! Index of band containing 1000-nm wave
+     integer,                         intent(out) :: idx_uv_diag           ! Index of band containing 400-nm wave
+     integer,                         intent(out) :: idx_sw_cloudsim       ! Index of band for shortwave cosp diagnostics
+     integer,                         intent(out) :: idx_lw_diag           ! Index of band containing 1000-cm-1 wave (H2O window)
+     integer,                         intent(out) :: idx_lw_cloudsim       ! Index of band for longwave cosp diagnostics
+     integer,                         intent(out) :: changeseed
+     integer, dimension(:,:),         intent(out) :: band2gpt_sw           ! Array for converting shortwave band limits to g-points
+     real(kind_phys), dimension(:),   intent(out) :: sw_low_bounds         ! Lower bounds of shortwave bands
+     real(kind_phys), dimension(:),   intent(out) :: sw_high_bounds        ! Upper bounds of shortwave bands
+     character(len=*),                intent(out) :: errmsg
+     integer,                         intent(out) :: errflg
+     ! Local variables
+     real(kind_phys), target :: wavenumber_low_shortwave(nswbands)
+     real(kind_phys), target :: wavenumber_high_shortwave(nswbands)
+     real(kind_phys), target :: wavenumber_low_longwave(nlwbands)
+     real(kind_phys), target :: wavenumber_high_longwave(nlwbands)
+
+     ! Set the sw/lw band boundaries in radconstants.  Also sets
+     ! indicies of specific bands for diagnostic output and COSP input.
+     call set_wavenumber_bands(kdist_sw, kdist_lw, nswbands, nlwbands, idx_sw_diag, idx_nir_diag, &
+                 idx_uv_diag, idx_sw_cloudsim, idx_lw_diag, idx_lw_cloudsim, nswgpts, nlwgpts,    &
+                 wavenumber_low_shortwave, wavenumber_high_shortwave, wavenumber_low_longwave,    &
+                 wavenumber_high_longwave, band2gpt_sw, errmsg, errflg)
+     if (errflg /= 0) then
+        return
+     end if
+
+     call radiation_utils_register(nswbands, nlwbands, wavenumber_low_shortwave, wavenumber_high_shortwave, &
+             wavenumber_low_longwave, wavenumber_high_longwave, errmsg, errflg)
+     if (errflg /= 0) then
+        return
+     end if
+
+     ! Initialize the SW band boundaries
+     call get_sw_spectral_boundaries_ccpp(sw_low_bounds, sw_high_bounds, 'cm-1', errmsg, errflg)
+     if (errflg /= 0) then
+        return
+     end if
+     changeseed = nlwgpts
+
+  end subroutine rrtmgp_inputs_setup_register
+
+
 !> \section arg_table_rrtmgp_inputs_setup_init Argument Table
 !! \htmlinclude rrtmgp_inputs_setup_init.html
 !!
-  subroutine rrtmgp_inputs_setup_init(nswbands, nlwbands, pref_edge, pver, pverp, kdist_sw, &
-                   kdist_lw, qrl, is_first_step, use_rad_dt_cosz, timestep_size, nstep, iradsw, dt_avg,  &
-                   irad_always, is_first_restart_step, p_top_for_rrtmgp, nradgas, gasnamelength, current_cal_day,  &
-                   ktopcam, ktoprad, nlaycam, sw_low_bounds, sw_high_bounds, idx_sw_diag, idx_nir_diag,        &
-                   idx_uv_diag, idx_sw_cloudsim, idx_lw_diag, idx_lw_cloudsim, nswgpts, nlwgpts, changeseed,   &
-                   nlay, nlayp, nextsw_cday, band2gpt_sw, irad_always_out, errmsg, errflg)
+  subroutine rrtmgp_inputs_setup_init(pref_edge, pver, pverp, qrl, is_first_step,         &
+                   use_rad_dt_cosz, timestep_size, nstep, iradsw, dt_avg, irad_always, is_first_restart_step, &
+                   p_top_for_rrtmgp, nradgas, gasnamelength, current_cal_day, ktopcam, ktoprad, nlaycam,      &
+                   nlay, nlayp, nextsw_cday, irad_always_out, errmsg, errflg)
      use ccpp_kinds,             only: kind_phys
-     use ccpp_gas_optics_rrtmgp, only: ty_gas_optics_rrtmgp_ccpp
-     use radiation_utils,        only: radiation_utils_init, get_sw_spectral_boundaries_ccpp
 
      ! Inputs
-     integer,                         intent(in) :: nswbands
-     integer,                         intent(in) :: nlwbands               ! Number of longwave bands
      integer,                         intent(in) :: nradgas                ! Number of radiatively active gases
      integer,                         intent(in) :: pverp                  ! Number of vertical interfaces
      integer,                         intent(in) :: pver                   ! Number of vertical layers
@@ -32,8 +88,6 @@ module rrtmgp_inputs_setup
      real(kind_phys),                 intent(in) :: timestep_size          ! Timestep size (s)
      real(kind_phys),                 intent(in) :: current_cal_day        ! Current calendar day
      real(kind_phys), dimension(:),   intent(in) :: pref_edge              ! Reference pressures (interfaces) (Pa)
-     type(ty_gas_optics_rrtmgp_ccpp), intent(in) :: kdist_sw               ! Shortwave gas optics object
-     type(ty_gas_optics_rrtmgp_ccpp), intent(in) :: kdist_lw               ! Longwave gas optics object
      logical,                         intent(in) :: is_first_step          ! Flag for whether this is the first timestep (.true. = yes)
      logical,                         intent(in) :: is_first_restart_step  ! Flag for whether this is the first restart step (.true. = yes)
      logical,                         intent(in) :: use_rad_dt_cosz        ! Use adjusted radiation timestep for cosz calculation
@@ -46,32 +100,13 @@ module rrtmgp_inputs_setup
                                                                            !  or is 1 less than nlay if "extra layer" is used in the radiation calculations
      integer,                         intent(out) :: nlay                  ! Number of vertical layers in radiation calculation
      integer,                         intent(out) :: nlayp                 ! Number of vertical interfaces in radiation calculations (nlay + 1)
-     ! Indices to specific bands for diagnostic output and COSP input
-     integer,                         intent(out) :: idx_sw_diag           ! Index of band containing 500-nm wave
-     integer,                         intent(out) :: idx_nir_diag          ! Index of band containing 1000-nm wave
-     integer,                         intent(out) :: idx_uv_diag           ! Index of band containing 400-nm wave
-     integer,                         intent(out) :: idx_sw_cloudsim       ! Index of band for shortwave cosp diagnostics
-     integer,                         intent(out) :: idx_lw_diag           ! Index of band containing 1000-cm-1 wave (H2O window)
-     integer,                         intent(out) :: idx_lw_cloudsim       ! Index of band for longwave cosp diagnostics
 
-     integer,                         intent(out) :: nswgpts               ! Number of shortwave g-points
-     integer,                         intent(out) :: nlwgpts               ! Number of longwave g-points
-     integer,                         intent(out) :: changeseed            ! Random number seed for mcica longwave
-     integer, dimension(:,:),         intent(out) :: band2gpt_sw           ! Array for converting shortwave band limits to g-points
      real(kind_phys),                 intent(out) :: nextsw_cday           ! The next calendar day during which the shortwave radiation calculation will be performed
-     real(kind_phys), dimension(:),   intent(out) :: sw_low_bounds         ! Lower bounds of shortwave bands
-     real(kind_phys), dimension(:),   intent(out) :: sw_high_bounds        ! Upper bounds of shortwave bands
      real(kind_phys), dimension(:,:), intent(inout) :: qrl                 ! Longwave radiative heating
      character(len=*),                intent(out) :: errmsg
      integer,                         intent(out) :: errflg
      integer,                         intent(out) :: irad_always_out       ! Number of time steps to execute radiation continuously
      real(kind_phys),                 intent(out) :: dt_avg                ! averaging time interval for zenith angle
-
-     ! Local variables
-     real(kind_phys), target :: wavenumber_low_shortwave(nswbands)
-     real(kind_phys), target :: wavenumber_high_shortwave(nswbands)
-     real(kind_phys), target :: wavenumber_low_longwave(nlwbands)
-     real(kind_phys), target :: wavenumber_high_longwave(nlwbands)
 
      ! Set error variables
      errflg = 0
@@ -98,28 +133,6 @@ module rrtmgp_inputs_setup
         nlaycam = nlay
      end if
 
-     ! Set the sw/lw band boundaries in radconstants.  Also sets
-     ! indicies of specific bands for diagnostic output and COSP input.
-     call set_wavenumber_bands(kdist_sw, kdist_lw, nswbands, nlwbands, idx_sw_diag, idx_nir_diag, &
-                 idx_uv_diag, idx_sw_cloudsim, idx_lw_diag, idx_lw_cloudsim, nswgpts, nlwgpts,    &
-                 wavenumber_low_shortwave, wavenumber_high_shortwave, wavenumber_low_longwave,    &
-                 wavenumber_high_longwave, band2gpt_sw, errmsg, errflg)
-     if (errflg /= 0) then
-        return
-     end if
-
-     call radiation_utils_init(nswbands, nlwbands, wavenumber_low_shortwave, wavenumber_high_shortwave, &
-             wavenumber_low_longwave, wavenumber_high_longwave, errmsg, errflg)
-     if (errflg /= 0) then
-        return
-     end if
-
-     ! Initialize the SW band boundaries
-     call get_sw_spectral_boundaries_ccpp(sw_low_bounds, sw_high_bounds, 'cm-1', errmsg, errflg)
-     if (errflg /= 0) then
-        return
-     end if
-
      if (is_first_step) then
         qrl = 0._kind_phys
      end if
@@ -143,8 +156,6 @@ module rrtmgp_inputs_setup
      if (.not. is_first_restart_step) then
         nextsw_cday = current_cal_day
      end if
-
-     changeseed = nlwgpts
 
   end subroutine rrtmgp_inputs_setup_init
 

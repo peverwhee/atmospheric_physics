@@ -3,7 +3,7 @@
   type = scheme
 
 [ccpp-arg-table]
-  name  = rrtmgp_sw_gas_optics_init
+  name  = rrtmgp_sw_gas_optics_register
   type  = scheme
 [ sw_filename ]
   standard_name = filename_of_rrtmgp_shortwave_k_distribution

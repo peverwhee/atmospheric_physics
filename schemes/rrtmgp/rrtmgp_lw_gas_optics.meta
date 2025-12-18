@@ -5,7 +5,7 @@
   dependencies = objects/ccpp_gas_concentrations.F90
 
 [ccpp-arg-table]
-  name  = rrtmgp_lw_gas_optics_init
+  name  = rrtmgp_lw_gas_optics_register
   type  = scheme
 [ lw_filename ]
   standard_name = filename_of_rrtmgp_longwave_k_distribution

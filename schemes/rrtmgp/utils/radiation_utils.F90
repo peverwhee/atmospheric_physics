@@ -4,7 +4,7 @@ module radiation_utils
   implicit none
   private
 
-  public :: radiation_utils_init
+  public :: radiation_utils_register
   public :: get_sw_spectral_boundaries_ccpp
   public :: get_lw_spectral_boundaries_ccpp
   public :: get_mu_lambda_weights_ccpp
@@ -20,7 +20,7 @@ module radiation_utils
 
 contains
 
-  subroutine radiation_utils_init(nswbands_in, nlwbands_in, low_shortwave, high_shortwave, &
+  subroutine radiation_utils_register(nswbands_in, nlwbands_in, low_shortwave, high_shortwave, &
                   low_longwave, high_longwave, errmsg, errflg)
     integer,          intent(in) :: nswbands_in         ! Number of shortwave bands
     integer,          intent(in) :: nlwbands_in         ! Number of longwave bands
@@ -39,22 +39,22 @@ contains
     nlwbands = nlwbands_in
     allocate(wavenumber_low_shortwave(nswbands), stat=errflg, errmsg=alloc_errmsg)
     if (errflg /= 0) then
-       write(errmsg,'(a,a)') 'radiation_utils_init: failed to allocate wavenumber_low_shortwave, message: ', &
+       write(errmsg,'(a,a)') 'radiation_utils_register: failed to allocate wavenumber_low_shortwave, message: ', &
           alloc_errmsg
     end if
     allocate(wavenumber_high_shortwave(nswbands), stat=errflg, errmsg=alloc_errmsg)
     if (errflg /= 0) then
-       write(errmsg,'(a,a)') 'radiation_utils_init: failed to allocate wavenumber_high_shortwave, message: ', &
+       write(errmsg,'(a,a)') 'radiation_utils_register: failed to allocate wavenumber_high_shortwave, message: ', &
           alloc_errmsg
     end if
     allocate(wavenumber_low_longwave(nlwbands), stat=errflg, errmsg=alloc_errmsg)
     if (errflg /= 0) then
-       write(errmsg,'(a,a)') 'radiation_utils_init: failed to allocate wavenumber_low_longwave, message: ', &
+       write(errmsg,'(a,a)') 'radiation_utils_register: failed to allocate wavenumber_low_longwave, message: ', &
           alloc_errmsg
     end if
     allocate(wavenumber_high_longwave(nlwbands), stat=errflg, errmsg=alloc_errmsg)
     if (errflg /= 0) then
-       write(errmsg,'(a,a)') 'radiation_utils_init: failed to allocate wavenumber_high_longwave, message: ', &
+       write(errmsg,'(a,a)') 'radiation_utils_register: failed to allocate wavenumber_high_longwave, message: ', &
           alloc_errmsg
     end if
 
@@ -65,7 +65,7 @@ contains
 
     wavenumber_boundaries_set = .true.
 
-  end subroutine radiation_utils_init
+  end subroutine radiation_utils_register
 
 !=========================================================================================
 

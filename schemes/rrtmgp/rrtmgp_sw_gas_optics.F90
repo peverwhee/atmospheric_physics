@@ -7,14 +7,14 @@ module rrtmgp_sw_gas_optics
 
   implicit none
   private
-  public :: rrtmgp_sw_gas_optics_init
+  public :: rrtmgp_sw_gas_optics_register
   public :: rrtmgp_sw_gas_optics_run
 
 contains
-!> \section arg_table_rrtmgp_sw_gas_optics_init Argument Table
-!! \htmlinclude rrtmgp_sw_gas_optics_init.html
+!> \section arg_table_rrtmgp_sw_gas_optics_register Argument Table
+!! \htmlinclude rrtmgp_sw_gas_optics_register.html
 !!
-  subroutine rrtmgp_sw_gas_optics_init(sw_filename, available_gases, kdist, &
+  subroutine rrtmgp_sw_gas_optics_register(sw_filename, available_gases, kdist, &
                   errmsg, errflg)
     use ccpp_kinds,              only: kind_phys
     use ccpp_gas_optics_rrtmgp,  only: ty_gas_optics_rrtmgp_ccpp
@@ -320,13 +320,13 @@ contains
          tsi_default, mg_default, sb_default,                   &
          rayl_lower_allocatable, rayl_upper_allocatable)
 
-    call check_error_msg('rrtmgp_sw_gas_optics_init_load', errmsg)
+    call check_error_msg('rrtmgp_sw_gas_optics_register_load', errmsg)
     if (len_trim(errmsg) > 0) then
        errflg = 1
        return
     end if
 
-  end subroutine rrtmgp_sw_gas_optics_init
+  end subroutine rrtmgp_sw_gas_optics_register
 
 !> \section arg_table_rrtmgp_sw_gas_optics_run Argument Table
 !! \htmlinclude rrtmgp_sw_gas_optics_run.html
